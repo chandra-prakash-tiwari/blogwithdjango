@@ -1,0 +1,61 @@
+<nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+    <div class="container-fluid">
+        <a class="navbar-brand" href="#">Chandra Prakash Blog's</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+            data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
+            aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav me-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="/articles">Home</a>
+                </li>
+                {% if user.is_authenticated %}
+                <li class="nav-item">
+                    <a class="nav-link" href="/articles/add?next={{request.path}}">Add</a>
+                </li>
+                {% endif %}
+            </ul>
+            <div class="btn-group">
+                <button type="button" class="btn btn-light dropdown-toggle" data-bs-toggle="dropdown" data-bs-display="static" aria-expanded="false">
+                  User
+                </button>
+                <ul class="dropdown-menu dropdown-menu-lg-end">
+                    {% if user.is_authenticated %}
+                    <li class="dropdown-item">
+                        <a  class="nav-link" href="/accounts/profile">View Profile</a>
+                    </li>
+                    <li class="dropdown-item">
+                        <a  class="nav-link" href="/articles/add?next={{request.path}}">Add Blog</a>
+                    </li>
+                    <li class="dropdown-item">
+                        <a  class="nav-link" href="/articles/get_all_by_user">View All Blog</a>
+                    </li>
+                    <li class="dropdown-item">
+                        <a  class="nav-link" href="/accounts/logout?next={{request.path}}">Logout</a>
+                    </li>
+                    {% else %}
+                    <li class="dropdown-item">
+                        <a  class="nav-link" href="/accounts/login?next={{request.path}}">Login</a>
+                    </li>
+                    <li class="dropdown-item">
+                        <a  class="nav-link" href="/accounts/signup?next={{request.path}}">Signup</a>
+                    </li>
+                    {% endif %}
+                </ul>
+            </div>
+              
+            <!-- {% if not user.is_authenticated %}
+            <form class="d-flex">
+                <a class="btn btn-light" href="/accounts/login?next={{request.path}}">Login</a>
+                <a class="btn btn-light ms-3" href="/accounts/signup?next={{request.path}}">Signup</a>
+            </form>
+            {% else %}
+            <form class="d-flex">
+                <a class="btn btn-light" href="/accounts/logout?next={{request.path}}" onclick="return confirm('are you sure for logout')">Logout</a>
+            </form>
+            {% endif %} -->
+        </div>
+    </div>
+</nav>

@@ -1,0 +1,8 @@
+<div style="border-top: grey solid 1px;">
+    <h3>Leave a Reply</h3>
+    <form method="POST">
+        {% csrf_token %}
+        {{form.as_p}}
+        <button class="btn btn-primary" type="submit"> Submit</button>
+    </form>
+</div>

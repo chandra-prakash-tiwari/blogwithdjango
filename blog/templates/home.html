@@ -1,0 +1,39 @@
+{% extends "base.html"%}
+
+{% block content %}
+    <div>
+      {% for message in messages %}
+    
+        <div class="alert alert-danger" id="message">
+            {{ message }}
+        </div>
+      {% endfor %}
+      {% if posts.count is not 0 %}
+        {% for post in posts %}
+        <div class="card box-color" style="width: 90%; margin: 1rem auto;">
+            <div class="card-body">
+              <h5 class="card-title" style="text-transform: capitalize;">{{post.title}}</h5>
+              {% if post.status is 0 %}
+                <p class="card-text" style="text-transform: lowercase; color: blue;">Draft</p>
+              {% endif %}
+              <p class="card-test" style="text-transform: lowercase;">{{post.author}}</p>
+              <p class="card-text">{{post.content| slice:":200"}}</p>
+              <a href="{{post.slug}}" class="btn btn-primary">Read More</a>
+            </div>
+          </div>
+        {% endfor %}
+      {% else %}
+      <div class="card" style="width: 90%; margin: 1rem auto;">
+        {% if messages %}
+          <p class="errornote">
+            {{ messages }}
+          </p>
+          {% endif %}
+
+        <div class="card-body">
+          <h5 class="card-title" style="text-transform: capitalize;">No posts yet</h5>
+        </div>
+      </div>
+      {% endif %}
+    </div>
+{% endblock %}

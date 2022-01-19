@@ -1,0 +1,38 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <div class="card" style="margin: 0rem 2rem; padding: 2rem">
+        <div>
+            <div style="display: -webkit-inline-box;">
+                <h1>Profile</h1>
+                <a class="btn btn-primary" href="edit/">Edit</a>
+            </div>
+            <table>
+                <tr>
+                    <th>Username</th>
+                    <td>{{user.username}}</td>
+                </tr>
+                <tr>
+                    <th>First Name</th>
+                    <td>{{user.first_name}}</td>
+                </tr>
+                <tr>
+                    <th>Last Name</th>
+                    <td>{{user.last_name}}</td>
+                </tr>
+                <tr>
+                    <th>Email</th>
+                    <td>{{user.email}}</td>
+                </tr>
+                <tr>
+                    <th>Date Of Joining</th>
+                    <td>{{user.date_joined}}</td>
+                </tr>
+                <tr>
+                    <th>Last Login</th>
+                    <td>{{user.last_login}}</td>
+                </tr>
+            </table>
+        </div>
+    </div>
+{% endblock %}
