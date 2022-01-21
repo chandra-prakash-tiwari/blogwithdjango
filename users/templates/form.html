@@ -3,6 +3,13 @@
 <div  style="width: 100%; margin-bottom: 2rem;">
     <div class="card" style="width: 75%; margin: auto; padding: 2rem;">
         <h1 class="card-title" style="align-self: center;">{{action}}</h1>
+        {% for message in messages %}
+    
+        <div class="alert alert-danger">
+            {{ message }}
+        </div>
+
+        {% endfor %}
         <form method="post">
             {% csrf_token %}
             {% for field in form %}

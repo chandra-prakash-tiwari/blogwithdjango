@@ -1,10 +1,9 @@
 {% extends "base.html" %}
 {% block content %}
 <div  style="width: 100%;">
-    <div class="card" style="width: 75%; margin: auto; padding: 2rem;">
+    <div class="card" style="width: 50%; margin: auto; padding: 2rem;">
         <h1 class="card-title" style="align-self: center;">Log In</h1>
         {% for message in messages %}
-    
         <div class="alert alert-danger">
             {{ message }}
         </div>
@@ -15,6 +14,7 @@
           {{ form.as_p }}
           <button class="btn btn-primary" type="submit">Log In</button>
         </form>  
+        <a href="/accounts/password_reset" style="text-decoration: auto;">Forgotten password?</a>
     </div>
 </div>
 {% endblock %}

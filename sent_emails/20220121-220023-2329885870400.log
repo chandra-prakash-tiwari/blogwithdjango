@@ -1,0 +1,26 @@
+Content-Type: text/plain; charset="utf-8"
+MIME-Version: 1.0
+Content-Transfer-Encoding: 7bit
+Subject: Password Reset Requested
+From: tiwarive@gmail.com
+To: tiwarivas88@gmail.com
+Date: Fri, 21 Jan 2022 16:30:23 -0000
+Message-ID: 
+ <164278262343.9256.17787379654385895145@INHNJLPT-974290.tatatechnologies.com>
+
+
+Hello,
+
+We received a request to reset the password for your account for this email address. To initiate the password reset process for your account, click the link below.
+
+http://127.0.0.1:8000/accounts/reset/MTU/azmfsn-21a2a60b22eda21f06e45c57d60ca9e4
+
+This link can only be used once. If you need to reset your password again, please visit http://127.0.0.1:8000 and request another reset.
+
+If you did not make this request, you can simply ignore this email.
+
+Sincerely,
+Blog department TTL
+
+
+-------------------------------------------------------------------------------

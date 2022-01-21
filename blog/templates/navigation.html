@@ -18,9 +18,11 @@
                 {% endif %}
             </ul>
             <div class="btn-group">
-                <button type="button" class="btn btn-light dropdown-toggle" data-bs-toggle="dropdown" data-bs-display="static" aria-expanded="false">
-                  User
-                </button>
+                {% if user.is_authenticated %}
+                <img src="{{user.users.avatar.url}}" type="button" class="btn btn-light dropdown-toggle" data-bs-toggle="dropdown" data-bs-display="static" aria-expanded="false" style="padding:0;border-radius: 50%;width: 3rem;"/>
+                {% else %}
+                <img src="../../media/avatar/default.png" type="button" class="btn btn-light dropdown-toggle" data-bs-toggle="dropdown" data-bs-display="static" aria-expanded="false" style="padding:0;border-radius: 50%;width: 3rem;"/>
+                {% endif %}
                 <ul class="dropdown-menu dropdown-menu-lg-end">
                     {% if user.is_authenticated %}
                     <li class="dropdown-item">
@@ -33,7 +35,7 @@
                         <a  class="nav-link" href="/articles/get_all_by_user">View All Blog</a>
                     </li>
                     <li class="dropdown-item">
-                        <a  class="nav-link" href="/accounts/logout?next={{request.path}}">Logout</a>
+                        <a  class="nav-link" href="/accounts/logout?next={{request.path}}" onclick="()=>confirm('Do you want to logout?')">Logout</a>
                     </li>
                     {% else %}
                     <li class="dropdown-item">
