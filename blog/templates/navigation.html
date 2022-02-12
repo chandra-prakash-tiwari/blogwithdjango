@@ -21,7 +21,7 @@
                 {% if user.is_authenticated %}
                 <img src="{{user.users.avatar.url}}" type="button" class="btn btn-light dropdown-toggle" data-bs-toggle="dropdown" data-bs-display="static" aria-expanded="false" style="padding:0;border-radius: 50%;width: 3rem;"/>
                 {% else %}
-                <img src="../../media/avatar/default.png" type="button" class="btn btn-light dropdown-toggle" data-bs-toggle="dropdown" data-bs-display="static" aria-expanded="false" style="padding:0;border-radius: 50%;width: 3rem;"/>
+                <img src="/media/avatar/default.png" type="button" class="btn btn-light dropdown-toggle" data-bs-toggle="dropdown" data-bs-display="static" aria-expanded="false" style="padding:0;border-radius: 50%;width: 3rem;"/>
                 {% endif %}
                 <ul class="dropdown-menu dropdown-menu-lg-end">
                     {% if user.is_authenticated %}
@@ -35,7 +35,10 @@
                         <a  class="nav-link" href="/articles/get_all_by_user">View All Blog</a>
                     </li>
                     <li class="dropdown-item">
-                        <a  class="nav-link" href="/accounts/logout?next={{request.path}}" onclick="()=>confirm('Do you want to logout?')">Logout</a>
+                        <a  class="nav-link" href="/accounts/change_password" onclick="return confirm('Do you want to change you password?')">Change Password</a>
+                    </li>
+                    <li class="dropdown-item">
+                        <a  class="nav-link" href="/accounts/logout?next={{request.path}}" onclick="return confirm('Do you want to logout?')">Logout</a>
                     </li>
                     {% else %}
                     <li class="dropdown-item">
@@ -47,7 +50,6 @@
                     {% endif %}
                 </ul>
             </div>
-              
             <!-- {% if not user.is_authenticated %}
             <form class="d-flex">
                 <a class="btn btn-light" href="/accounts/login?next={{request.path}}">Login</a>
@@ -58,6 +60,7 @@
                 <a class="btn btn-light" href="/accounts/logout?next={{request.path}}" onclick="return confirm('are you sure for logout')">Logout</a>
             </form>
             {% endif %} -->
+            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Repudiandae voluptatibus rerum ullam nisi, dignissimos cumque consequatur sint asperiores ratione quas veritatis natus consectetur quis esse nihil doloribus animi ipsum perferendis. Voluptates, nobis quo nostrum inventore provident voluptas, iste atque obcaecati exercitationem modi adipisci? Odio hic commodi corrupti ullam ipsam culpa in vel iste doloremque dicta id quasi natus itaque dolore nobis vero, ducimus quia officiis sit alias quidem impedit reiciendis unde. Corporis sit quas quasi! Est libero amet quo exercitationem, recusandae culpa itaque ut perspiciatis voluptate maxime illum, placeat debitis nulla voluptates fugiat corporis repellendus eveniet, minima ipsam facilis aliquam! Quos repellat facere hic odio suscipit laborum sit! Quam, molestias, dolor laborum maiores laudantium voluptatibus aspernatur accusamus tempora praesentium beatae maxime commodi labore aliquid fugiat, inventore adipisci! Doloremque exercitationem alias officiis modi dicta ipsam animi debitis, quibusdam asperiores! Sapiente voluptates neque magni, deserunt dolorum amet suscipit a! Quisquam ratione voluptas ad suscipit nam assumenda excepturi, est quaerat minima perferendis distinctio inventore corrupti quidem. Labore laudantium repudiandae ipsa, vero quidem explicabo autem perspiciatis aut maxime, suscipit voluptate! Est, repellendus ipsam delectus aliquid architecto sequi quisquam quia voluptatem nemo. Veritatis, ex enim iusto incidunt vel ea, esse impedit quaerat facere facilis quas? Commodi possimus tempora officia doloremque assumenda? Quae ad amet, repellat tempore nesciunt in sequi eaque quo expedita, ipsa consequatur odio minus, cum minima voluptas nostrum consequuntur praesentium quidem obcaecati. Autem vero repellat pariatur, magnam rem fuga quia voluptatem modi molestias deserunt! Est in reiciendis, quaerat porro nemo sed cumque nihil sint. Provident quia deserunt maiores quaerat laboriosam distinctio ducimus in corporis porro atque, dicta aut. Quaerat quae quo, quasi animi ducimus mollitia consectetur doloremque expedita, illum, quisquam eius hic magni unde. Cum soluta modi cumque qui eaque deserunt expedita voluptatum cupiditate, aperiam debitis, dicta ratione, quia eos hic aliquam dolorem nobis libero est repellat assumenda sed dolore facilis quidem impedit. Explicabo similique quo, fuga praesentium perspiciatis dicta magni totam veniam quisquam sequi quos cupiditate velit eveniet cum beatae, minus optio voluptas ex unde omnis exercitationem mollitia facere porro quae. Eum aspernatur ducimus iure error commodi dolorem fugit quos dolore! Hic quae impedit earum debitis totam vero consequuntur eum est quibusdam nemo atque doloribus assumenda saepe fugiat iure nesciunt, adipisci necessitatibus nisi laudantium? Fuga, quae nostrum tempora similique optio odio in sapiente quod ab. Nobis sapiente, suscipit odit quod magnam eveniet dolores molestias quaerat nulla architecto perferendis accusantium, corrupti quia, quisquam velit? Quam excepturi, aperiam consectetur aspernatur autem quasi perferendis tempore porro fuga. Dolorum voluptatibus ex assumenda nostrum, accusamus delectus veritatis impedit facilis quae magnam necessitatibus, aperiam dignissimos aliquid, quam officia laudantium doloribus officiis similique quos nisi. Consectetur blanditiis debitis nisi voluptas beatae natus cumque, adipisci totam veniam vero mollitia voluptatibus recusandae, voluptate possimus. Deserunt corrupti quae, doloribus incidunt error quis odio iusto, laborum consequuntur quod, similique nobis voluptate ad? Temporibus quisquam velit ducimus, recusandae iure facilis ratione iusto repudiandae, consequuntur ipsam expedita obcaecati ab autem eum voluptatem et harum commodi omnis? Ullam, dicta consectetur. Praesentium aut laborum minima aperiam fuga?
         </div>
     </div>
 </nav>

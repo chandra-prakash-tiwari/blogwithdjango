@@ -1,0 +1,25 @@
+Content-Type: text/plain; charset="utf-8"
+MIME-Version: 1.0
+Content-Transfer-Encoding: 7bit
+Subject: Password Reset Requested
+From: tiwarive@gmail.com
+To: tiwarive@gmail.com
+Date: Sat, 22 Jan 2022 04:56:33 -0000
+Message-ID: 
+ <164282739391.12136.13088905139808264766@INHNJLPT-974290.tatatechnologies.com>
+
+
+Hello root,
+
+It seems like you forgot your password for http://127.0.0.1:8000. If this is true, click the link below to reset your password.
+
+Reset my password http://127.0.0.1:8000/accounts/reset/MTY/aznec9-77c515dd5991e9832e70fc8ff69db078
+
+If you did not forget your password, please disregard this email.
+
+Sincerely,
+Blog department TTL
+
+
+
+-------------------------------------------------------------------------------

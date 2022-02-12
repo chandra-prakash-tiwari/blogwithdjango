@@ -117,3 +117,33 @@ class NewPasswordResetForm(forms.Form):
         if error:
             raise forms.ValidationError(error)
         return password2
+
+
+
+class ChangePassword(forms.Form):   
+    oldpassword=forms.CharField(widget=forms.PasswordInput(attrs={'class': 'form-control', 'placeholder': 'Old Password',}), required=True, label='Old Password')
+    password1=forms.CharField(widget=forms.PasswordInput(attrs={'class': 'form-control', 'placeholder': 'Password', }), required=True, label='Password' ,help_text="")
+    password2=forms.CharField(widget=forms.PasswordInput(attrs={'class': 'form-control', 'placeholder': 'Confirm Password',}), required=True, label='Confirm Password')
+    def clean_password1(self):
+        password1 = self.cleaned_data.get('password1')
+        if password1 == '':
+            raise forms.ValidationError('This field is required.')
+        return password1
+
+    def clean_password2(self):
+        error=[]
+        password2 = self.cleaned_data.get('password2')
+        password1 = self.cleaned_data.get('password1')
+        if len(password2) < 8:
+            error.append('Password must be at least 8 characters long.')
+        if not any(char.isdigit() for char in password2):
+            error.append('Password must contain at least one number.')
+        if not any(char.isupper() for char in password2):
+            error.append('Password must contain at least one uppercase letter.')
+        if not any(char.islower() for char in password2):
+            error.append('Password must contain at least one lowercase letter.')
+        if password1 != password2:
+            error.append('Passwords do not match.')
+        if error:
+            raise forms.ValidationError(error)
+        return password2

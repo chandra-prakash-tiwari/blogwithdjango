@@ -1,11 +1,10 @@
-from base64 import urlsafe_b64decode
 import email
 from django.forms import models
 from django.shortcuts import render, redirect, HttpResponse
 from django.contrib.auth import authenticate, login, logout
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
-from .forms import EditForm, LoginForm, UserForm, PasswordResetForm, NewPasswordResetForm
+from .forms import ChangePassword, EditForm, LoginForm, UserForm, PasswordResetForm, NewPasswordResetForm
 from django.core.mail import send_mail
 from . import models
 from mysite import settings
@@ -13,6 +12,7 @@ from django.utils.http import urlsafe_base64_encode, urlsafe_base64_decode
 from django.contrib.auth.tokens import default_token_generator
 from django.utils.encoding import force_bytes
 from django.template.loader import render_to_string
+from django.contrib.auth.models import User
 
 def login_user(request):
     if request.method == 'POST':
@@ -20,7 +20,7 @@ def login_user(request):
         if form.is_valid():
             username = form.cleaned_data['username']
             password = form.cleaned_data['password']
-            user = authenticate(username=username, password=password)
+            user = authenticate(username=username, password=password) or User.objects.get(email=username)
             if user is not None:
                 login(request, user)
                 return redirect(request.GET.get('next') or 'home')
@@ -66,13 +66,13 @@ def password_reset(request):
     if request.method == 'POST':
         form=PasswordResetForm(request.POST)
         if form.is_valid():
-            user=models.Users.objects.filter(email=form.cleaned_data['email'])
+            user=models.Users.objects.get(email=form.cleaned_data['email'])
             if user:
                 subject = "Password Reset Requested"
                 email_template_name = "new_password_email.txt"
-                c={'protocol':request.scheme, 'domain':request.META['HTTP_HOST'], 'uid':urlsafe_base64_encode(force_bytes(user[0].pk)), 'token':default_token_generator.make_token(user[0])}
+                c={'name':user.first_name , 'protocol':request.scheme, 'domain':request.META['HTTP_HOST'], 'uid':urlsafe_base64_encode(force_bytes(user.pk)), 'token':default_token_generator.make_token(user)}
                 message = render_to_string(email_template_name, c)
-                send_mail(subject, message, settings.EMAIL_HOST_USER, [user[0].email], fail_silently=False)
+                send_mail(subject, message, settings.EMAIL_HOST_USER, [user.email], fail_silently=False)
 
                 return redirect('/accounts/password_reset/done/')
             else:
@@ -86,12 +86,9 @@ def password_reset_confirm(request, uidb64, token):
     try:
         uid = urlsafe_base64_decode(uidb64)
         user = models.Users.objects.get(pk=uid)
-        print(uid)
-        print(user)
-        print(default_token_generator.check_token(user, token))
     except(TypeError, ValueError, OverflowError, models.Users.DoesNotExist):
         user = None
-    if user is not None:
+    if user is not None and default_token_generator.check_token(user, token):
         if request.method == 'POST':
             form = NewPasswordResetForm(request.POST)
             if form.is_valid():
@@ -102,7 +99,22 @@ def password_reset_confirm(request, uidb64, token):
             form = NewPasswordResetForm()
         return render(request, 'form.html', {'form': form, 'action': 'Reset Password'})
     else:
-        return HttpResponse("Link is invalid")
+        return render(request, 'link_expired.html')
 
 def password_reset_done(request):
     return render(request, 'passwordresetdone.html')
+
+def change_password(request):
+    if request.method == 'POST':
+        form = ChangePassword(request.POST)
+        if form.is_valid():
+            user = authenticate(username=request.user.username, password=form.cleaned_data['oldpassword'])
+            if user is not None:
+                user.set_password(form.cleaned_data['password1'])
+                user.save()
+                return redirect('/accounts/login')
+            else:
+                messages.error(request, "Old password is incorrect")
+    else:
+        form = ChangePassword()
+    return render(request, 'form.html', {'form': form, 'action': 'Change Password'})

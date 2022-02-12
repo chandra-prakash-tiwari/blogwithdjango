@@ -15,7 +15,7 @@ def BlogDetails(request, slug):
 def BlogHome(request):
     posts = Post.objects.filter(status=1) .order_by('-created_date')
     return render(request, 'home.html',{'posts': posts})
-
+    
 @login_required
 def CreateBlog(request):
     if request.method == 'POST':
@@ -36,7 +36,7 @@ def BlogUpdate(request, slug):
             form = PostForm(request.POST, instance=post)
             if form.is_valid():
                 form.save()
-                return redirect(request.GET.get('next', '/'))
+                return redirect('/articles/'+form.cleaned_data['slug'])
         else:
             form = PostForm(instance=post)
     

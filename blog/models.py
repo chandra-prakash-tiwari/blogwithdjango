@@ -21,6 +21,9 @@ class Feedback(models.Model):
     name = models.CharField(max_length=100)
     email = models.EmailField()
     message = models.TextField()
+    user = models.CharField(max_length=100, default='Anonymous')
+    created_date = models.DateTimeField(auto_now_add=True)
+    post = models.ForeignKey(Post, on_delete=models.CASCADE, related_name='post_feedback')
 
     class Meta:
-        db_table='feedback'
+        db_table='blog_feedback'
